@@ -6,6 +6,7 @@ var message = document.getElementById("message");
 var userName = document.getElementById("userName");
 var sendBtn = document.getElementById("send");
 var messages = document.getElementById("messages");
+var typings = document.getElementById('typing');
 
 // add click listener to our button
 sendBtn.addEventListener("click", function() {
@@ -15,6 +16,8 @@ sendBtn.addEventListener("click", function() {
         message: message.value,
         userName: userName.value
     });
+
+    typings.innerHTML = "";
 });
 
 message.addEventListener('keypress', () => {
@@ -26,4 +29,9 @@ socket.on("chat", function(data) {
   // When we receive a “chat” event, display the message to the user
   messages.innerHTML +=
     "<p><strong>" + data.userName + ": </strong>" + data.message + "</p>";
+});
+
+
+socket.on('typing', function(data) {
+   typings.innerHTML = data + " is Typing";
 });

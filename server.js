@@ -28,4 +28,8 @@ sock.on("connection", function(socket) {
     // use emit to send the “chat” event to everybody that is connected, including the sender
     sock.sockets.emit("chat", data);
   });
+
+  socket.on("typing", function(data) {
+    sock.sockets.emit("typing", data);
+  })
 });
